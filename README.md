@@ -1,6 +1,7 @@
-# Oráculo Cultural v10
+# Oráculo Cultural
 
-Versão com a aba **Comparativo** aprimorada visualmente, sem alteração na coleta nem nos scrapers.
+Coleta obras culturais e organiza comparáveis para análise contábil a valor justo.
+
 
 ## Scrapers ativos
 
@@ -8,8 +9,6 @@ Versão com a aba **Comparativo** aprimorada visualmente, sem alteração na col
 - Blombo
 - Gagosian
 - Saatchi Art
-
-O Artmajeur permanece fora da coleta automática.
 
 ## Como abrir
 
