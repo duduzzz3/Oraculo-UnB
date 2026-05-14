@@ -964,7 +964,7 @@ def aba_coleta(df: pd.DataFrame) -> None:
     st.subheader("Coleta automática")
     st.caption("Use 0 para tentar coletar o máximo disponível. Os scrapers ativos são ArtSoul, Blombo, Gagosian e Saatchi Art.")
     with st.form("form_scrapers"):
-        sites = st.multiselect("Fontes", list(SITES.keys()), default=[])
+        sites = st.multiselect("Sites", list(SITES.keys()), default=[])
         max_obras = st.number_input("Quantidade máxima por site (0 = sem limite)", 0, 5000, 100, 10)
         headless = st.checkbox("Executar navegador em segundo plano", value=True)
         executar = st.form_submit_button("Executar coleta")
@@ -1047,8 +1047,8 @@ def aba_coleta(df: pd.DataFrame) -> None:
     a, b = st.columns([1.5, 1], gap="large")
     with a:
         st.markdown("**Apagar registros do acervo local**")
-        site_del = st.selectbox("Apagar por site", ["Todos"] + list(SITES.keys()) + ["Manual"])
-        st.caption("Você pode apagar um site específico ou toda a base local.")
+        site_del = st.selectbox("Apagar por fonte", ["Todos"] + list(SITES.keys()) + ["Manual"])
+        st.caption("Você pode apagar uma fonte específica ou toda a base local.")
     with b:
         st.markdown("&nbsp;", unsafe_allow_html=True)
         if st.button("Apagar dados selecionados", use_container_width=True):
@@ -1085,13 +1085,13 @@ def aba_acervo(df: pd.DataFrame) -> None:
         st.info("Nenhuma obra cadastrada ainda.")
         return
     c1, c2, c3, c4 = st.columns(4)
-    sites = c1.multiselect("Sites", sorted(df["site"].dropna().unique().tolist()), default=[])
+    sites = c1.multiselect("Fontes", sorted(df["fonte"].dropna().unique().tolist()), default=[])
     tecnicas = c2.multiselect("Técnicas", sorted(df["tecnica"].dropna().unique().tolist()), default=[])
     busca = c3.text_input("Buscar por nome/autor")
     ordem = c4.selectbox("Ordenar", ["Mais recentes", "Preço maior", "Preço menor", "Nome"])
     filtrado = df.copy()
     if sites:
-        filtrado = filtrado[filtrado["site"].isin(sites)]
+        filtrado = filtrado[filtrado["fonte"].isin(sites)]
     if tecnicas:
         filtrado = filtrado[filtrado["tecnica"].isin(tecnicas)]
     if busca:
@@ -1132,7 +1132,7 @@ def montar_resultados_comparativo(df: pd.DataFrame, ref: pd.Series) -> pd.DataFr
             "Similaridade (%)": score,
             "Nome da obra": row["nome_obra"],
             "Autor": row["autor"],
-            "Site": row["site"],
+            "Fonte": row["site"],
             "Preço": dinheiro(row["preco"]),
             "Preço numérico": row.get("preco"),
             "Técnica": row["tecnica"],
