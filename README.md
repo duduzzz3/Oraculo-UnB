@@ -1,1 +1,1 @@
-# Oráculo Cultural v12\n\nVersão com ajustes visuais na aba Comparativo, melhorias na Coleta e atualização dos dados exibidos na página inicial.\n
+# Oráculo Cultural
