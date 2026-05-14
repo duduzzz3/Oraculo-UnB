@@ -940,7 +940,7 @@ def aba_inicio(df: pd.DataFrame) -> None:
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Obras cadastradas", numero(len(df)))
     c2.metric("Preço médio", dinheiro(df["preco"].dropna().mean()) if not df.empty and "preco" in df and df["preco"].notna().any() else SEM_INFO)
-    c3.metric("Sites", numero(df["site"].nunique()) if not df.empty and "site" in df else "0")
+    c3.metric("Fontes", numero(df["site"].nunique()) if not df.empty and "site" in df else "0")
     c4.metric("Cotação USD-BRL", f"R$ {obter_cotacao_dolar():.4f}".replace(".", ","))
 
     i1, i2 = st.columns(2)
@@ -964,7 +964,7 @@ def aba_coleta(df: pd.DataFrame) -> None:
     st.subheader("Coleta automática")
     st.caption("Use 0 para tentar coletar o máximo disponível. Os scrapers ativos são ArtSoul, Blombo, Gagosian e Saatchi Art.")
     with st.form("form_scrapers"):
-        sites = st.multiselect("Sites", list(SITES.keys()), default=[])
+        sites = st.multiselect("Fontes", list(SITES.keys()), default=[])
         max_obras = st.number_input("Quantidade máxima por site (0 = sem limite)", 0, 5000, 100, 10)
         headless = st.checkbox("Executar navegador em segundo plano", value=True)
         executar = st.form_submit_button("Executar coleta")
